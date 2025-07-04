@@ -15,7 +15,7 @@ const Footer = () => {
       {/* Newsletter */}
       <div className="w-full max-w-[1300px] mx-auto px-6 sm:px-10 md:px-16 pt-24 pb-20 text-center">
         <h2 className="text-4xl md:text-5xl font-playfair font-light leading-snug mb-4">
-          Stay Connected to <span className="text-[#2994f2]">Luxury</span>
+          Stay Connected to <span className="text-[#B89433]">Luxury</span>
         </h2>
         <p className="text-base md:text-lg text-gray-300 mb-8">
           Be the first to discover our latest masterpieces and exclusive events
@@ -26,7 +26,7 @@ const Footer = () => {
             placeholder="Enter your email"
             className="bg-white/10 text-white px-6 py-3 rounded-full w-full text-base border border-white/20 focus:outline-none"
           />
-          <button className="bg-gradient-to-r from-purple-600 to-blue-500 text-base font-semibold  gap-2 hover:opacity-90 hover:from-[#0056B3] hover:to-[#008080] text-white px-6 py-3 rounded-full flex items-center space-x-2 transition-all duration-500 shadow-lg hover:shadow-xl">
+          <button className="bg-gradient-to-r from-[#C87C38] to-[#a07e7e]  text-base font-semibold  gap-2 hover:opacity-90 hover:from-[#a07e7e] hover:to-[#C87C38] text-white px-6 py-3 rounded-full flex items-center space-x-2 transition-all duration-500 shadow-lg hover:shadow-xl">
             Subscribe <FaArrowUpRightFromSquare size={14} />
           </button>
         </div>
@@ -41,11 +41,11 @@ const Footer = () => {
     <div className="space-y-6 md:w-[42%]">
       {/* Logo and Tagline */}
       <div className="flex items-center gap-4">
-        <div className="bg-gradient-to-br from-purple-600 to-blue-500 w-14 h-14 flex items-center justify-center rounded-2xl text-white text-2xl font-bold shadow-md">
+        <div className="bg-gradient-to-r from-[#C87C38] to-[#a07e7e] w-14 h-14 flex items-center justify-center rounded-2xl text-white text-2xl font-bold shadow-md">
           V
         </div>
         <div>
-          <h4 className="text-2xl font-semibold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent font-playfair">
+          <h4 className="text-2xl font-semibold bg-gradient-to-r from-[#C87C38] to-[#a07e7e] bg-clip-text text-transparent font-playfair">
             Vibgyor Events
           </h4>
           <p className="text-sm text-gray-300 tracking-wider font-medium mt-0.5 uppercase">
@@ -62,7 +62,7 @@ const Footer = () => {
       </p>
 
       {/* Social Icons */}
-    <div className="flex gap-5 mt-5">
+    <div className="flex gap-5 mt-5 ">
   {[FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn].map((Icon, idx) => {
     const hoverTextColors = [
       "group-hover:text-[#1877F2]", // Facebook
@@ -112,7 +112,7 @@ const Footer = () => {
       <h5 className="text-xl font-semibold mb-6 text-white font-playfair">Connect</h5>
       <ul className="space-y-5 text-base text-gray-300">
         <li className="flex items-start gap-4">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-purple-600 to-blue-500 flex items-center justify-center mt-1">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-[#C87C38] to-[#a07e7e] flex items-center justify-center mt-1">
             <FaPhoneAlt className="text-white" size={18} />
           </div>
           <div>
@@ -122,7 +122,7 @@ const Footer = () => {
         </li>
 
         <li className="flex items-start gap-4">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-purple-600 to-blue-500 flex items-center justify-center mt-1">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-[#C87C38] to-[#a07e7e] flex items-center justify-center mt-1">
             <MdEmail className="text-white" size={20} />
           </div>
           <div>
@@ -132,7 +132,7 @@ const Footer = () => {
         </li>
 
         <li className="flex items-start gap-4">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-purple-600 to-blue-500 flex items-center justify-center mt-1">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-[#C87C38] to-[#a07e7e] flex items-center justify-center mt-1">
             <FaMapMarkerAlt className="text-white" size={18} />
           </div>
           <div>

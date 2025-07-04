@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Crown, Check, ArrowRight } from "lucide-react";
-import sideImage from "../royalwedpicture/white.jpg";
-import bgImage from "../royalwedpicture/bgImage.jpg";
+import sideimg from "../assets/Wedding/wed1.jpg";
+import bgImage from "../assets/Wedding/bgImage.jpg"
 import RoyalParticles from "./RoyalParticles";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import event1 from "../assets/Wedding/wed1.jpg"
+import event2 from "../assets/Wedding/wed2.webp"
+import event3 from "../assets/Wedding/wed3.jpg"
+import event4 from "../assets/Wedding/wed4.jpg"
+
 
 const services = [
   "Bespoke venue selection and royal transformation",
@@ -58,10 +65,19 @@ const packages = [
 ];
 
 export default function RoyalWeddingSection() {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: "ease-in-out",
+      once: false,
+      mirror: true,
+    });
+  }, []);
+
   return (
-    <div className="w-full  ">
+    <div className="w-full">
       <div className="relative z-10">
-         <RoyalParticles intensity={0.3} />
+        <RoyalParticles intensity={0.3} />
         <section
           className="relative h-auto md:h-screen bg-fixed bg-center bg-cover flex items-center justify-center text-white"
           style={{ backgroundImage: `url(${bgImage})` }}
@@ -69,18 +85,21 @@ export default function RoyalWeddingSection() {
           <div className="bg-black/70 w-full h-full backdrop-blur-sm flex items-center py-12 md:py-0">
             <div className="max-w-7xl mx-auto w-full px-4 sm:px-8 flex flex-col md:flex-row items-center gap-12">
               {/* Left */}
-              <div className="md:w-1/2 space-y-6 text-start md:text-left">
+              <div 
+                className="md:w-1/2 space-y-6 text-start md:text-left"
+                data-aos="fade-right"
+                data-aos-delay="100"
+              >
                 <div className="flex items-center justify-start gap-4">
-                  <Crown className="text-purple-500 w-8 h-8" />{" "}
-                  {/* size increased */}
-                  <h4 className="text-purple-400 tracking-widest font-serif font-light uppercase text-base sm:text-lg">
+                  <Crown className="text-[#B89433] w-8 h-8" />
+                  <h4 className="text-[#B89433] tracking-widest font-serif font-light uppercase text-base sm:text-lg">
                     Majestic Celebrations
                   </h4>
                 </div>
 
                 <h1 className="text-[52px] sm:text-[48px] md:text-[90px] leading-[1.2] font-serif font-light">
                   ROYAL <br />
-                  <span className="bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-[#C87C38] to-[#a07e7e] bg-clip-text text-transparent">
                     WEDDINGS
                   </span>
                 </h1>
@@ -112,20 +131,28 @@ export default function RoyalWeddingSection() {
                   </div>
                 </div>
 
-                <button className="mt-6 sm:mt-8 px-6 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-serif font-light rounded-full shadow-lg hover:scale-105 transition-transform duration-300 text-sm sm:text-base">
+                <button 
+                  className="mt-6 sm:mt-8 px-6 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-[#C87C38] to-[#a07e7e] text-white font-serif font-light rounded-full shadow-lg hover:scale-105 transition-transform duration-300 text-sm sm:text-base"
+                  data-aos="fade-up"
+                  data-aos-delay="300"
+                >
                   BEGIN YOUR JOURNEY
                 </button>
               </div>
 
               {/* Right */}
-              <div className="md:w-1/2 flex justify-center items-center mt-12">
+              <div 
+                className="md:w-1/2 flex justify-center items-center mt-12"
+                data-aos="fade-left"
+                data-aos-delay="200"
+              >
                 <div className="relative">
                   <img
-                    src={sideImage}
+                    src= {sideimg}
                     alt="Royal Wedding"
                     className="rounded-2xl w-[250px] sm:w-[300px] md:w-[450px] h-auto max-h-[600px] object-cover shadow-[0_0_40px_rgba(255,255,255,0.2)]"
                   />
-                  <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center shadow-lg">
+                  <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-gradient-to-r from-[#C87C38] to-[#a07e7e] flex items-center justify-center shadow-lg">
                     <Crown className="text-white w-7 h-7" />
                   </div>
                 </div>
@@ -135,16 +162,17 @@ export default function RoyalWeddingSection() {
         </section>
 
         <section className="relative bg-black text-white py-20 px-4 sm:px-6 overflow-hidden">
-         
-            <RoyalParticles intensity={0.3} />
-          
+          <RoyalParticles intensity={0.3} />
 
           <div className="relative z-10 max-w-7xl mx-auto text-center space-y-4">
-            <div className="max-w-7xl p-10 mx-auto text-center space-y-4">
+            <div 
+              className="max-w-7xl p-10 mx-auto text-center space-y-4"
+              data-aos="fade-up"
+            >
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-light">
                 Royal Services
               </h2>
-              <p className="text-base sm:text-lg  text-gray-300">
+              <p className="text-base sm:text-lg text-gray-300">
                 Every aspect of your celebration is carefully curated and
                 flawlessly executed
               </p>
@@ -155,9 +183,11 @@ export default function RoyalWeddingSection() {
                 <div
                   key={index}
                   className="bg-[#1A1A1A] rounded-2xl p-6 text-center shadow-md hover:shadow-xl transition duration-300"
+                  data-aos="fade-up"
+                  data-aos-delay={100 * (index % 4)}
                 >
                   <div className="flex flex-col items-start gap-4">
-                    <Check className="text-purple-500 w-6 h-6" />
+                    <Check className="text-[#B89433] w-6 h-6" />
                     <p className="text-sm sm:text-start text-gray-100">
                       {service}
                     </p>
@@ -169,7 +199,10 @@ export default function RoyalWeddingSection() {
         </section>
 
         <section className="bg-black/90 text-white py-20 px-4 sm:px-6">
-          <div className="max-w-7xl mx-auto text-center space-y-4">
+          <div 
+            className="max-w-7xl mx-auto text-center space-y-4"
+            data-aos="fade-up"
+          >
             <h2 className="text-3xl sm:text-5xl font-serif font-light">
               Royal Portfolio
             </h2>
@@ -187,7 +220,7 @@ export default function RoyalWeddingSection() {
                 location: "Udaipur Palace",
                 year: "2024",
                 image:
-                  "https://assets.vogue.in/photos/605c368d538cb8a5df7a9533/2:3/w_1920,c_limit/ITC%20Grand%20Bharat%20(1).jpg", // replace with actual image
+                 event1,
               },
               {
                 title: "Royal Garden Affair",
@@ -195,7 +228,7 @@ export default function RoyalWeddingSection() {
                 location: "Jodhpur Heritage",
                 year: "2024",
                 image:
-                  "https://i.pinimg.com/736x/9c/bf/96/9cbf962a58f2e4dbce059426cc2422e7.jpg", // replace with actual image
+                 event2,
               },
               {
                 title: "Golden Sunset Ceremony",
@@ -204,7 +237,7 @@ export default function RoyalWeddingSection() {
                 location: "Jaisalmer Fort",
                 year: "2023",
                 image:
-                  "https://i.pinimg.com/736x/f4/4b/50/f44b5044a8be95102dd4aa98e7ce3904.jpg", // replace with actual image
+                 event3,
               },
               {
                 title: "Ethereal Palace Wedding",
@@ -213,12 +246,14 @@ export default function RoyalWeddingSection() {
                 location: "Jaisalmer Fort",
                 year: "2023",
                 image:
-                  "https://i.pinimg.com/736x/4c/7e/c3/4c7ec347c20579dce75d532fd6ef9505.jpg", // replace with actual image
+                  event4,
               },
             ].map((item, index) => (
               <div
                 key={index}
                 className="relative rounded-2xl font-serif font-light overflow-hidden shadow-lg group hover:shadow-2xl transition"
+                data-aos="zoom-in"
+                data-aos-delay={100 * (index % 4)}
               >
                 <img
                   src={item.image}
@@ -229,7 +264,7 @@ export default function RoyalWeddingSection() {
                   <h3 className="text-xl font-semibold">{item.title}</h3>
                   <p className="text-sm text-gray-300">{item.description}</p>
                   <div className="flex justify-between items-center text-sm mt-2">
-                    <a href="#" className="text-purple-400 hover:underline">
+                    <a href="#" className="text-[#B89433] hover:underline">
                       {item.location}
                     </a>
                     <span className="text-gray-400">{item.year}</span>
@@ -240,12 +275,15 @@ export default function RoyalWeddingSection() {
           </div>
         </section>
 
-        <section className="bg-[#0b0b0b] text-white py-20 px-4">
-          <div className="text-center space-y-4 max-w-3xl mx-auto">
+        {/* <section className="bg-[#0b0b0b] text-white py-20 px-4">
+          <div 
+            className="text-center space-y-4 max-w-3xl mx-auto"
+            data-aos="fade-up"
+          >
             <h2 className="text-4xl sm:text-5xl font-serif font-light">
               Royal Packages
             </h2>
-            <p className="text-gray-300 text-base  sm:text-lg">
+            <p className="text-gray-300 text-base sm:text-lg">
               Choose your perfect celebration package
             </p>
           </div>
@@ -258,10 +296,11 @@ export default function RoyalWeddingSection() {
   bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm transition-all duration-300 group
   hover:bg-gradient-to-br hover:from-purple-900/40 hover:to-blue-900/40
   hover:shadow-[0_0_30px_rgba(168,85,247,0.4)]`}
+                data-aos="fade-up"
+                data-aos-delay={100 * index}
               >
-                {/* Badge with gradient background */}
                 {index === 1 && pkg.badge && (
-                  <span className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-sm px-4 py-2 rounded-full shadow-md">
+                  <span className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#C87C38] to-[#a07e7e] text-white text-sm px-4 py-2 rounded-full shadow-md">
                     {pkg.badge}
                   </span>
                 )}
@@ -269,7 +308,7 @@ export default function RoyalWeddingSection() {
                 <h3 className="text-2xl font-semibold text-white mb-2 text-center">
                   {pkg.title}
                 </h3>
-                <p className="text-purple-400 text-3xl font-semibold  text-center">
+                <p className="text-[#B89433] text-3xl font-semibold text-center">
                   {pkg.price}
                 </p>
                 <p className="text-gray-300 text-sm font-semibold text-center mt-2">
@@ -279,8 +318,8 @@ export default function RoyalWeddingSection() {
                 <ul className="mt-6 space-y-3">
                   {pkg.features.map((feature, i) => (
                     <li key={i} className="flex items-center gap-2">
-                      <Check className="text-purple-500 w-4 h-4" />
-                      <span className="text-sm  text-gray-200">{feature}</span>
+                      <Check className="text-[#B89433] w-4 h-4" />
+                      <span className="text-sm text-gray-200">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -288,20 +327,22 @@ export default function RoyalWeddingSection() {
                 <button
                   className={`mt-8 w-full py-3 text-sm font-semibold rounded-full transition-all duration-300
   bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm text-white border border-gray-500
-  group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-blue-600 group-hover:text-white`}
+   hover:bg-gradient-to-r from-[#C87C38] to-[#a07e7e]`}
                 >
                   Select Package
                 </button>
               </div>
             ))}
           </div>
-        </section>
+        </section> */}
 
         <section className="relative bg-gradient-to-r from-purple-900 via-blue-900 to-green-900 text-white py-20 px-4 text-center overflow-hidden">
-          {/* Particle Background */}
           <RoyalParticles intensity={0.3} className="absolute inset-0 z-0" />
 
-          <div className="relative z-10 max-w-4xl mx-auto space-y-6 shadow-none">
+          <div 
+            className="relative z-10 max-w-4xl mx-auto space-y-6 shadow-none"
+            data-aos="zoom-in"
+          >
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-medium">
               Ready for Your Royal Wedding?
             </h2>
@@ -309,7 +350,11 @@ export default function RoyalWeddingSection() {
               Let us transform your dream into a magnificent reality with our
               royal wedding expertise
             </p>
-            <button className="mt-6 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold text-sm sm:text-base px-8 py-3 rounded-full hover:scale-105 transition-transform duration-300">
+            <button 
+              className="mt-6 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#C87C38] to-[#a07e7e] text-white font-bold text-sm sm:text-base px-8 py-3 rounded-full hover:scale-105 transition-transform duration-300"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               START PLANNING <ArrowRight className="w-4 h-4" />
             </button>
           </div>

@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { FaUser, FaCalendarAlt, FaCrown, FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock, FaPaperPlane } from "react-icons/fa"; // Added FaPaperPlane
 import { gsap } from "gsap";
 import { Power3, Back } from "gsap";
+import axios from 'axios';
 
 const ConsultationForm = () => {
   const containerRef = useRef();
@@ -13,15 +14,17 @@ const ConsultationForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
   // State to hold form data (for demonstrating input values, not full validation)
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phoneNumber: '',
-    eventType: '',
-    preferredDate: '',
-    guestCount: '',
-    budgetRange: '',
-    location: '',
-    additionalRequirements: ''
+    FullName: "",
+    email: "",
+    phone_number: "",
+    EventType: "",
+    BudgetRange: "",
+    AdditionalRequirements: "",
+    PreferredDate: "",
+    city: "",
+    GuestCount: "",
+    subject: "",
+    message: ""
   });
 
   // Handle input changes
@@ -56,19 +59,52 @@ const ConsultationForm = () => {
     );
   }, [currentStep]); // Rerun animation whenever currentStep changes
 
-  const handleNext = () => {
+  // const handleNext = () => {
+  //   if (currentStep < 4) {
+  //     setCurrentStep(prevStep => prevStep + 1);
+  //   } else {
+  //     // Logic for submitting the form on the last step
+  //     alert("Form Submitted! (Check console for data)");
+  //     console.log("Form Data:", formData);
+  //   }
+  // };
+
+
+
+  const handleNext = async () => {
     if (currentStep < 4) {
-      setCurrentStep(prevStep => prevStep + 1);
+      setCurrentStep(prev => prev + 1);
     } else {
-      // Logic for submitting the form on the last step
-      alert("Form Submitted! (Check console for data)");
-      console.log("Form Data:", formData);
+      try {
+        const response = await axios.post("http://localhost:5100/api/forms", formData);
+        console.log("Submitted:", response.data);
+        alert("Your consultation has been submitted!");
+
+        // Reset form
+        setFormData({
+          FullName: "",
+          email: "",
+          phone_number: "",
+          EventType: "",
+          BudgetRange: "",
+          AdditionalRequirements: "",
+          PreferredDate: "",
+          city: "",
+          GuestCount: "",
+          subject: "",
+          message: ""
+        });
+        setCurrentStep(1);
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        alert("Something went wrong. Please try again.");
+      }
     }
   };
 
   const handlePrevious = () => {
     if (currentStep > 1) {
-      setCurrentStep(prevStep => prevStep - 1);
+      setCurrentStep(prev => prev - 1);
     }
   };
 
@@ -86,13 +122,13 @@ const ConsultationForm = () => {
         return (
           <>
             <div className="flex flex-col">
-              <label htmlFor="fullName" className="mb-2 text-lg font-medium text-white/90">Full Name</label>
+              <label htmlFor="FullName" className="mb-2 text-lg font-medium text-white/90">Full Name</label>
               <input
                 type="text"
-                id="fullName"
-                name="fullName"
+                id="FullName"
+                name="FullName"
                 placeholder="Enter your full name"
-                value={formData.fullName}
+                value={formData.FullName}
                 onChange={handleChange}
                 className="bg-white/10 px-5 py-3 rounded-md border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-1 focus:ring-yellow-400 focus:border-yellow-400 transition-all duration-300"
               />
@@ -110,13 +146,13 @@ const ConsultationForm = () => {
               />
             </div>
             <div className="flex flex-col sm:col-span-2">
-              <label htmlFor="phoneNumber" className="mb-2 text-lg font-medium text-white/90">Phone Number</label>
+              <label htmlFor="phone_number" className="mb-2 text-lg font-medium text-white/90">Phone Number</label>
               <input
                 type="tel"
-                id="phoneNumber"
-                name="phoneNumber"
+                id="phone_number"
+                name="phone_number"
                 placeholder="+1 (555) 123-4567"
-                value={formData.phoneNumber}
+                value={formData.phone_number}
                 onChange={handleChange}
                 className="bg-white/10 px-5 py-3 rounded-md border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-1 focus:ring-yellow-400 focus:border-yellow-400 transition-all duration-300"
               />
@@ -127,94 +163,94 @@ const ConsultationForm = () => {
         return (
           <>
             <div className="flex flex-col sm:col-span-2">
-              <label htmlFor="eventType" className="mb-2 text-lg font-medium text-white/90">Event Type</label>
+              <label htmlFor="EventType" className="mb-2 text-lg font-medium text-white/90">Event Type</label>
               <select
-                id="eventType"
-                name="eventType"
-                value={formData.eventType}
+                id="EventType"
+                name="EventType"
+                value={formData.EventType}
                 onChange={handleChange}
                 className="bg-white/10 px-5 py-3 rounded-md border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-1 focus:ring-yellow-400 focus:border-yellow-400 transition-all duration-300 appearance-none custom-select-arrow"
               >
-                <option value="" disabled>Select event type</option>
-                <option value="Wedding">Wedding</option>
-                <option value="Corporate Event">Corporate Event</option>
-                <option value="Private Party">Private Party</option>
-                <option value="Birthday">Birthday Celebration</option>
-                <option value="Anniversary">Anniversary</option>
-                <option value="Other">Other</option>
+               <option value=""className=" text-black font-bold" >Select event type</option>
+                <option value="Wedding" className=" text-black">Wedding</option>
+                <option value="Corporate Event" className=" text-black">Corporate Event</option>
+                <option value="Private Party" className=" text-black">Private Party</option>
+                <option value="Birthday" className=" text-black">Birthday Celebration</option>
+                <option value="Anniversary" className=" text-black">Anniversary</option>
+                <option value="Other" className=" text-black">Other</option>
               </select>
             </div>
             <div className="flex flex-col">
-              <label htmlFor="preferredDate" className="mb-2 text-lg font-medium text-white/90">Preferred Date</label>
+              <label htmlFor="PreferredDate" className="mb-2 text-lg font-medium text-white/90">Preferred Date</label>
               <input
                 type="date"
-                id="preferredDate"
-                name="preferredDate"
+                id="PreferredDate"
+                name="PreferredDate"
                 placeholder="dd-mm-yyyy"
-                value={formData.preferredDate}
+                value={formData.PreferredDate}
                 onChange={handleChange}
                 className="bg-white/10 px-5 py-3 rounded-md border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-1 focus:ring-yellow-400 focus:border-yellow-400 transition-all duration-300 date-input"
               />
             </div>
             <div className="flex flex-col">
-              <label htmlFor="guestCount" className="mb-2 text-lg font-medium text-white/90">Guest Count</label>
+              <label htmlFor="GuestCount" className="mb-2 text-lg font-medium text-white/90">Guest Count</label>
               <select
-                id="guestCount"
-                name="guestCount"
-                value={formData.guestCount}
+                id="GuestCount"
+                name="GuestCount"
+                value={formData.GuestCount}
                 onChange={handleChange}
                 className="bg-white/10 px-5 py-3 rounded-md border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-1 focus:ring-yellow-400 focus:border-yellow-400 transition-all duration-300 appearance-none custom-select-arrow"
               >
-                <option value="" disabled>Number of guests</option>
-                <option value="1-50">1-50</option>
-                <option value="51-100">51-100</option>
-                <option value="101-200">101-200</option>
-                <option value="201-500">201-500</option>
-                <option value="500+">500+</option>
+               <option value="" className=" text-black font-bold">Number of guests</option>
+                <option value="1-50" className=" text-black">1-50</option>
+                <option value="51-100" className=" text-black">51-100</option>
+                <option value="101-200" className=" text-black">101-200</option>
+                <option value="201-500" className=" text-black">201-500</option>
+                <option value="500+" className=" text-black">500+</option>
               </select>
             </div>
           </>
         );
-      case 3: // Budget Range, Location, Additional Requirements
+      case 3: // Budget Range, city, Additional Requirements
         return (
           <>
             <div className="flex flex-col">
-              <label htmlFor="budgetRange" className="mb-2 text-lg font-medium text-white/90">Budget Range</label>
+              <label htmlFor="BudgetRange" className="mb-2 text-lg font-medium text-white/90">Budget Range</label>
               <select
-                id="budgetRange"
-                name="budgetRange"
-                value={formData.budgetRange}
+                id="BudgetRange"
+                name="BudgetRange"
+                value={formData.BudgetRange}
                 onChange={handleChange}
                 className="bg-white/10 px-5 py-3 rounded-md border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-1 focus:ring-yellow-400 focus:border-yellow-400 transition-all duration-300 appearance-none custom-select-arrow"
               >
-                <option value="" disabled>Select budget range</option>
-                <option value="Under $10,000">Under $10,000</option>
-                <option value="$10,000 - $25,000">$10,000 - $25,000</option>
-                <option value="$25,000 - $50,000">$25,000 - $50,000</option>
-                <option value="$50,000 - $100,000">$50,000 - $100,000</option>
-                <option value="Over $100,000">Over $100,000</option>
+                <option value="" className=" text-black font-bold">Select budget range</option>
+                <option value="Under 10,000"  className=" text-black">Under 10,000</option>
+                <option value="10,000 - 25,000"  className=" text-black">10,000 - 25,000</option>
+                <option value="25,000 - 50,000"  className=" text-black">25,000 - 50,000</option>
+                <option value="50,000 - 100,000"  className=" text-black">50,000 - 100,000</option>
+                <option value="Over 100,000"  className=" text-black">Over 100,000</option>
               </select>
             </div>
             <div className="flex flex-col">
-              <label htmlFor="location" className="mb-2 text-lg font-medium text-white/90">Location</label>
+              <label htmlFor="city" className="mb-2 text-lg font-medium text-white/90">city</label>
               <input
                 type="text"
-                id="location"
-                name="location"
+                id="city"
+                name="city"
                 placeholder="City, State/Country"
-                value={formData.location}
+                value={formData.city}
                 onChange={handleChange}
                 className="bg-white/10 px-5 py-3 rounded-md border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-1 focus:ring-yellow-400 focus:border-yellow-400 transition-all duration-300"
               />
             </div>
             <div className="flex flex-col sm:col-span-2">
-              <label htmlFor="additionalRequirements" className="mb-2 text-lg font-medium text-white/90">Additional Requirements</label>
+              <label htmlFor="AdditionalRequirements" className="mb-2 text-lg font-medium text-white/90">Additional Requirements</label>
               <textarea
-                id="additionalRequirements"
-                name="additionalRequirements"
+                id="AdditionalRequirements"
+                name="AdditionalRequirements"
                 placeholder="Tell us about your vision, special requirements, or any specific details..."
                 rows="4"
-                value={formData.additionalRequirements}
+                value={formData.AdditionalRequirements}
                 onChange={handleChange}
                 className="bg-white/10 px-5 py-3 rounded-md border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-1 focus:ring-yellow-400 focus:border-yellow-400 transition-all duration-300"
               ></textarea>
@@ -248,7 +284,7 @@ const ConsultationForm = () => {
   return (
     <div className="relative min-h-screen bg-gradient-to-r from-[#240046] via-[#3c096c] to-[#9d4edd] overflow-hidden flex flex-col items-center py-10 px-4 font-sans">
       {/* Moving Square Particles */}
-      <di v className="absolute inset-0 -z-10">
+      <div className="absolute inset-0 -z-10">
         {[...Array(80)].map((_, i) => (
           <div
             key={i}
@@ -261,12 +297,12 @@ const ConsultationForm = () => {
             }}
           ></div>
         ))}
-      </di>
+      </div>
 
       {/* Main Consultation Form Section */}
       <div ref={containerRef} className="container mx-auto py-20 px-6 text-center text-white z-10 w-full lg:px-12 xl:px-24">
-        <FaCrown className="text-yellow-400 text-6xl mx-auto mb-6" />
-        <h1 className="text-[6.5vw] sm:text-[5vw] md:text-[4vw] lg:text-[3.2vw] xl:text-[3vw] font-extrabold bg-gradient-to-r from-yellow-300 to-pink-400 text-transparent bg-clip-text mb-4 whitespace-nowrap">
+        <FaCrown className="text-light text-6xl mx-auto mb-6" />
+        <h1 className="text-[6.5vw] sm:text-[5vw] md:text-[4vw] lg:text-[3.2vw] xl:text-[3vw] font-extrabold bg-gradient-to-r from-[#C87C38] to-[#a07e7e] text-transparent bg-clip-text mb-4 whitespace-nowrap">
           Book Your Royal Consultation
         </h1>
         <p className="text-white/80 text-lg sm:text-xl font-medium max-w-3xl mx-auto leading-relaxed">
@@ -277,7 +313,7 @@ const ConsultationForm = () => {
           <div className="lg:col-span-2 bg-white/10 backdrop-blur-md rounded-xl p-10 border border-white/20">
             <div className="flex items-center justify-between mb-8">
               <h2 className="text-2xl font-semibold">Consultation Request</h2>
-              <span className="text-sm bg-yellow-400 text-black rounded-full px-4 py-1 font-medium">Step {currentStep} of 4</span>
+              <span className="text-sm bg-gradient-to-r from-[#C87C38] to-[#a07e7e] rounded-full px-4 py-1 font-medium">Step {currentStep} of 4</span>
             </div>
 
             {/* Step Icons with dynamic highlighting and connecting lines */}
@@ -290,7 +326,7 @@ const ConsultationForm = () => {
                   <div
                     ref={addToIconsRef}
                     className={`w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg relative z-10 transition-colors duration-300
-                      ${i + 1 <= currentStep ? 'bg-yellow-400 text-black' : 'bg-white/20 text-white'}`
+                      ${i + 1 <= currentStep ? 'bg-[#B89433] text-black' : 'bg-white/20 text-white'}`
                     }
                   >
                     <Icon className={i + 1 === currentStep ? "text-black" : ""} />
@@ -326,7 +362,7 @@ const ConsultationForm = () => {
               </button>
               <button
                 onClick={handleNext}
-                className="bg-gradient-to-r from-yellow-400 to-pink-400 text-black px-8 py-3 rounded-md font-semibold text-lg shadow-md hover:opacity-90 transition-all duration-300"
+                className="bg-gradient-to-r from-[#C87C38] to-[#a07e7e] text-black px-8 py-3 rounded-md font-semibold text-lg shadow-md hover:opacity-90 transition-all duration-300"
               >
                 {currentStep === 4 ? 'Submit Request' : 'Next Step'}
               </button>
@@ -338,13 +374,12 @@ const ConsultationForm = () => {
             <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 space-y-5">
               <h3 className="text-xl font-semibold">Contact Information</h3>
               {[
-                { Icon: FaPhone, text: "+1 (555) 123‑4567" },
-                { Icon: FaEnvelope, text: "luxury@vibgyorevents.com" },
+                { Icon: FaEnvelope, text: "vibgyor@Gmail.com" },
                 { Icon: FaClock, text: "Mon‑Fri: 9AM–7PM EST" },
-                { Icon: FaMapMarkerAlt, text: "New York, Los Angeles, Miami" },
+                { Icon: FaMapMarkerAlt, text: "Ahemadavad" },
               ].map((item, idx) => (
                 <div key={idx} className="flex items-center gap-3 text-base text-white/90">
-                  <item.Icon className="text-yellow-300 text-lg" />
+                  <item.Icon className="text-[#B89433] text-lg" />
                   <span>{item.text}</span>
                 </div>
               ))}
@@ -358,7 +393,7 @@ const ConsultationForm = () => {
                 { Icon: FaCalendarAlt, title: "Flawless Execution", desc: "Every detail perfected" },
               ].map((item, idx) => (
                 <div key={idx} className="flex items-start gap-3">
-                  <item.Icon className="text-yellow-300 mt-1 text-lg" />
+                  <item.Icon className="text-[#B89433] mt-1 text-lg" />
                   <div>
                     <p className="font-medium">{item.title}</p>
                     <p className="text-white/60 text-base">{item.desc}</p>
@@ -372,7 +407,7 @@ const ConsultationForm = () => {
 
       {/* Newsletter Section (inserted as requested, without modifying your structure) */}
       {/* This div will appear below the main form content, but still within the top-level containerRef div */}
-      
+
 
       <style>{`
         @keyframes float {
@@ -417,14 +452,14 @@ const ConsultationForm = () => {
         .custom-select-arrow:valid {
           color: white; /* Make selected option text white */
         }
-      `}</style> 
+      `}</style>
 
 
-      
-       
+
+
     </div>
-    
-    
+
+
   );
 };
 
