@@ -7,6 +7,7 @@ import { MdSummarize, MdSpa } from "react-icons/md";
 import { FiPhoneCall } from "react-icons/fi";
 import { HiOutlineMailOpen } from "react-icons/hi";
 import { AiOutlineClockCircle } from "react-icons/ai";
+import party from '../assets/Home/party.mp4'
 
 import {
   Crown,
@@ -180,7 +181,7 @@ const events = [
     price: "Star Luxury",
     type: "Invitation Only",
     image: event1,
-    video: "/src/assets/Home/party.mp4",
+    video: party,
     rating: 4.9,
     category: "From ₹5,000"
   },
